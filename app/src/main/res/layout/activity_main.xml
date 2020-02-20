@@ -4,12 +4,66 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.main.MainActivity">
 
     <TextView
+        android:id="@+id/ac_main_tv_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"
         android:layout_centerInParent="true"/>
+
+    <LinearLayout
+        android:id="@+id/ac_main_ll_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/ac_main_rl_first">
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button 1"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button 2"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView 1"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView 2"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/ac_main_rl_first"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/ac_main_ac_ed_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="editText 1"
+            android:paddingTop="50dp"/>
+        <EditText
+            android:id="@+id/ac_main_ed_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ac_main_ac_ed_first"
+            android:hint="editText 2"/>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/ac_main_btn_uygula"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="uygula"
+        android:textAllCaps="false"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"/>
 
 </RelativeLayout>

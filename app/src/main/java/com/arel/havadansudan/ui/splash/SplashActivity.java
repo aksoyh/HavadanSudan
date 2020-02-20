@@ -1,10 +1,13 @@
-package com.arel.havadansudan;
+package com.arel.havadansudan.ui.splash;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.arel.havadansudan.R;
+import com.arel.havadansudan.ui.main.MainActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -13,12 +16,12 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-        final Intent myIntent = new Intent(this, MainActivity.class);
+        final Intent toMain = new Intent(this, MainActivity.class);
 
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(myIntent);
+                startActivity(toMain);
                 finish();
             }
         }, 2000);
