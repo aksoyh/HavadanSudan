@@ -1,6 +1,7 @@
 package com.arel.havadansudan.ui.main;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.arel.havadansudan.R;
+import com.arel.havadansudan.ui.detail.DetailActivity;
 import com.arel.havadansudan.utils.NetworkUtils;
 
 import java.io.IOException;
@@ -70,30 +73,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initButtonWorks() {
-
         btnUygula.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 GithubSearchQuery();
             }
         });
-
-    }
-
-    @SuppressLint("SetTextI18n")
-    private void GithubSearchQuery() {
-        String githubQuery = edtQuery.getText().toString();
-        URL githubSearchUrl = NetworkUtils.buildUrl(githubQuery);
-        tvUrl.setText("URL: " + githubSearchUrl.toString());
-
-        String githubSearchResult = null;
-
-        try {
-            githubSearchResult = NetworkUtils.getResponseFromHttpUrl(githubSearchUrl);
-            tvResult.setText(githubSearchResult);
-        } catch (IOException e) {
-            Toast.makeText(getApplicationContext(), "Hata! \n\n" + e.toString(), Toast.LENGTH_LONG).show();
-        }
     }
 
     public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
@@ -115,12 +100,12 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        void add(int position, String item) {
+        void addItem(int position, String item) {
             values.add(position, item);
             notifyItemInserted(position);
         }
 
-        void remove(int position) {
+        void removeItem(int position) {
             values.remove(position);
             notifyItemRemoved(position);
         }
@@ -151,19 +136,33 @@ public class MainActivity extends AppCompatActivity {
             //bagla.ivPicture.setImageDrawable(getDrawable(R.drawable.ic_card_visit));
             bagla.txtHeader.setText(name);
 
-            bagla.txtFooter.setText("Footer: " + name);
+            final String description = "Footer: " + name;
+
+            bagla.txtFooter.setText(description);
 
             bagla.ivPicture.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    remove(position);
+                    Intent toDetail = new Intent(getApplicationContext(), DetailActivity.class);
+                    toDetail.putExtra("HEADER", name);
+                    toDetail.putExtra("DESCRIPTION", description);
+                    startActivity(toDetail);
+
                 }
             });
+
+            bagla.txtFooter.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    addItem(position, "NEW");
+                }
+            });
+
 
             bagla.txtHeader.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    add(position, "NEW");
+                    removeItem(position);
                 }
             });
         }
@@ -174,5 +173,21 @@ public class MainActivity extends AppCompatActivity {
             return values.size();
         }
 
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void GithubSearchQuery() {
+        String githubQuery = edtQuery.getText().toString();
+        URL githubSearchUrl = NetworkUtils.buildUrl(githubQuery);
+        tvUrl.setText("URL: " + githubSearchUrl.toString());
+
+        String githubSearchResult = null;
+
+        try {
+            githubSearchResult = NetworkUtils.getResponseFromHttpUrl(githubSearchUrl);
+            tvResult.setText(githubSearchResult);
+        } catch (IOException e) {
+            Toast.makeText(getApplicationContext(), "Hata! \n\n" + e.toString(), Toast.LENGTH_LONG).show();
+        }
     }
 }
