@@ -4,95 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.MainActivity">
+    tools:context=".ui.main.MainActivity"
+    android:padding="16dp">
+
+    <RelativeLayout
+        android:id="@+id/ac_main_rl_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/ac_main_edt_search_box"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Aranacak query'i giriniz."
+            android:textSize="22sp" />
+
+        <ImageView
+            android:id="@+id/ac_main_iv_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_search"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:padding="8dp"/>
+    </RelativeLayout>
+
 
     <TextView
         android:id="@+id/ac_main_tv_url"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ac_main_rl_first"
-        android:layout_marginTop="25dp"
-        android:textSize="18sp"
-        android:padding="8dp"
-        android:visibility="gone"/>
+        android:layout_below="@id/ac_main_rl_search"
+        android:layout_marginTop="20dp"
+        android:lines="5"
+        android:background="@color/colorBlue"
+        android:textColor="@color/colorBlack"/>
 
-    <ScrollView
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/ac_main_tv_url"
-        android:layout_marginTop="50dp"
-        android:visibility="gone">
+        android:layout_height="match_parent"
+        android:layout_below="@id/ac_main_tv_url">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+            <TextView
+                android:id="@+id/ac_main_tv_search_result_json"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Öncelikle arama yapınız"
+                android:textSize="18sp"/>
+        </ScrollView>
+
         <TextView
-            android:id="@+id/ac_main_tv_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:text="Hello World!"
-            android:layout_centerInParent="true"/>
-    </ScrollView>
-
-
-
-    <LinearLayout
-        android:id="@+id/ac_main_ll_top"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_below="@id/ac_main_rl_first"
-        android:visibility="gone">
-        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/ac_main_error_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button 1"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Button 2"/>
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView 1"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView 2"/>
-    </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/ac_main_rl_first"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone">
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/ac_main_ac_ed_first"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="aranaca query giriniz:"
-            android:paddingTop="50dp"/>
-        <EditText
-            android:id="@+id/ac_main_ed_second"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/ac_main_ac_ed_first"
-            android:hint="editText 2"
+            android:textSize="24sp"
+            android:background="@color/colorAccent"
+            android:text="Hata! Lütfen tekrar deneyiniz."
+            android:textColor="@color/colorWhite"
+            android:layout_gravity="center"
             android:visibility="gone"/>
-    </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ac_main_recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <ProgressBar
+            android:id="@+id/ac_main_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"/>
 
-    <Button
-        android:id="@+id/ac_main_btn_uygula"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="uygula"
-        android:textAllCaps="false"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:visibility="gone"/>
+    </FrameLayout>
 
 </RelativeLayout>
